@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace PF_Backend.Models
 {
-    public class Ingredients
+    public class Ingredient
     {
         [Key]
         public int Id { get; set; }
@@ -11,6 +11,6 @@ namespace PF_Backend.Models
         public string? Name { get; set; }
 
         [JsonIgnore]
-        public List<Recipes>? Recipes { get; } = [];
+        public List<Portion>? Portions { get; set; } = []; 
     }
 }

@@ -17,7 +17,7 @@ namespace PF_Backend.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
 
-            modelBuilder.Entity("PF_Backend.Models.Ingredients", b =>
+            modelBuilder.Entity("PF_Backend.Models.Ingredient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -26,112 +26,90 @@ namespace PF_Backend.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PortionsId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PortionsId");
 
                     b.ToTable("Ingredients");
                 });
 
-            modelBuilder.Entity("PF_Backend.Models.Portions", b =>
+            modelBuilder.Entity("PF_Backend.Models.Portion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("IdIngredients")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IdRecipes")
+                    b.Property<int?>("IngredientId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("RecipeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RecipesId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Unity")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdIngredients");
+                    b.HasIndex("IngredientId");
 
-                    b.HasIndex("IdRecipes");
+                    b.HasIndex("RecipeId");
 
                     b.ToTable("Portions");
                 });
 
-            modelBuilder.Entity("PF_Backend.Models.Recipes", b =>
+            modelBuilder.Entity("PF_Backend.Models.Recipe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Difficulty")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Duration")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PortionsId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PortionsId");
 
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("PF_Backend.Models.Ingredients", b =>
+            modelBuilder.Entity("PF_Backend.Models.Portion", b =>
                 {
-                    b.HasOne("PF_Backend.Models.Portions", null)
-                        .WithMany("Ingredients")
-                        .HasForeignKey("PortionsId");
+                    b.HasOne("PF_Backend.Models.Ingredient", "Ingredient")
+                        .WithMany("Portions")
+                        .HasForeignKey("IngredientId");
+
+                    b.HasOne("PF_Backend.Models.Recipe", "Recipe")
+                        .WithMany("Portions")
+                        .HasForeignKey("RecipeId");
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("PF_Backend.Models.Portions", b =>
+            modelBuilder.Entity("PF_Backend.Models.Ingredient", b =>
                 {
-                    b.HasOne("PF_Backend.Models.Ingredients", null)
-                        .WithMany()
-                        .HasForeignKey("IdIngredients")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PF_Backend.Models.Recipes", null)
-                        .WithMany()
-                        .HasForeignKey("IdRecipes")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Portions");
                 });
 
-            modelBuilder.Entity("PF_Backend.Models.Recipes", b =>
+            modelBuilder.Entity("PF_Backend.Models.Recipe", b =>
                 {
-                    b.HasOne("PF_Backend.Models.Portions", null)
-                        .WithMany("Recipes")
-                        .HasForeignKey("PortionsId");
-                });
-
-            modelBuilder.Entity("PF_Backend.Models.Portions", b =>
-                {
-                    b.Navigation("Ingredients");
-
-                    b.Navigation("Recipes");
+                    b.Navigation("Portions");
                 });
 #pragma warning restore 612, 618
         }

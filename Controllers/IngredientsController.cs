@@ -23,14 +23,14 @@ namespace PF_Backend.Controllers
 
         // GET: api/Ingredients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Ingredients>>> GetIngredients()
+        public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredients()
         {
             return await _context.Ingredients.ToListAsync();
         }
 
         // GET: api/Ingredients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Ingredients>> GetIngredients(int id)
+        public async Task<ActionResult<Ingredient>> GetIngredients(int id)
         {
             var ingredients = await _context.Ingredients.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace PF_Backend.Controllers
         // PUT: api/Ingredients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIngredients(int id, Ingredients ingredients)
+        public async Task<IActionResult> PutIngredients(int id, Ingredient ingredients)
         {
             if (id != ingredients.Id)
             {
@@ -76,12 +76,12 @@ namespace PF_Backend.Controllers
         // POST: api/Ingredients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Ingredients>> PostIngredients(Ingredients ingredients)
+        public async Task<ActionResult<Ingredient>> PostIngredients(Ingredient ingredients)
         {
             _context.Ingredients.Add(ingredients);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIngredients", new { id = ingredients.Id }, ingredients);
+            return CreatedAtAction("GetIngredients", new { id = ingredients.Id }, ingredients); // Fica
         }
 
         // DELETE: api/Ingredients/5

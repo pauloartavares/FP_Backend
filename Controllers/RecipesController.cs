@@ -23,14 +23,14 @@ namespace PF_Backend.Controllers
 
         // GET: api/Recipes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recipes>>> GetRecipes()
+        public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
         {
             return await _context.Recipes.ToListAsync();
         }
 
         // GET: api/Recipes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recipes>> GetRecipes(int id)
+        public async Task<ActionResult<Recipe>> GetRecipes(int id)
         {
             var recipes = await _context.Recipes.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace PF_Backend.Controllers
         // PUT: api/Recipes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipes(int id, Recipes recipes)
+        public async Task<IActionResult> PutRecipes(int id, Recipe recipes)
         {
             if (id != recipes.Id)
             {
@@ -76,7 +76,7 @@ namespace PF_Backend.Controllers
         // POST: api/Recipes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Recipes>> PostRecipes(Recipes recipes)
+        public async Task<ActionResult<Recipe>> PostRecipes(Recipe recipes)
         {
             _context.Recipes.Add(recipes);
             await _context.SaveChangesAsync();

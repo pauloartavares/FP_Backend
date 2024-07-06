@@ -23,14 +23,14 @@ namespace PF_Backend.Controllers
 
         // GET: api/Portions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Portions>>> GetPortions()
+        public async Task<ActionResult<IEnumerable<Portion>>> GetPortions()
         {
             return await _context.Portions.ToListAsync();
         }
 
         // GET: api/Portions/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Portions>> GetPortions(int id)
+        public async Task<ActionResult<Portion>> GetPortions(int id)
         {
             var portions = await _context.Portions.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace PF_Backend.Controllers
         // PUT: api/Portions/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPortions(int id, Portions portions)
+        public async Task<IActionResult> PutPortions(int id, Portion portions)
         {
             if (id != portions.Id)
             {
@@ -76,7 +76,7 @@ namespace PF_Backend.Controllers
         // POST: api/Portions
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Portions>> PostPortions(Portions portions)
+        public async Task<ActionResult<Portion>> PostPortions(Portion portions)
         {
             _context.Portions.Add(portions);
             await _context.SaveChangesAsync();

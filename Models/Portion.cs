@@ -3,20 +3,17 @@ using System.Text.Json.Serialization;
 
 namespace PF_Backend.Models
 {
-    public class Portions
+    public class Portion
     {
         [Key]
         public int Id { get; set; }
 
-        public int IdRecipes { get; set; }
+        public int RecipesId { get; set; }
 
         [JsonIgnore]
-        public List<Recipes>? Recipes { get; set; } = null!;
+        public Recipe? Recipe { get; set; }
 
-        public int IdIngredients { get; set; }
-
-        [JsonIgnore]
-        public List<Ingredients>? Ingredients { get; set; } = null!;
+        public Ingredient? Ingredient { get; set; }
 
         public string? Unity { get; set; }
 

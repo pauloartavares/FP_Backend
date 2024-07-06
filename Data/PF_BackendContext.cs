@@ -14,25 +14,9 @@ namespace PF_Backend.Data
         {
         }
 
-        public DbSet<PF_Backend.Models.Recipes> Recipes { get; set; } = default!;
-        public DbSet<PF_Backend.Models.Ingredients> Ingredients { get; set; } = default!;
-        public DbSet<PF_Backend.Models.Portions> Portions { get; set; } = default!;
+        public DbSet<PF_Backend.Models.Recipe> Recipes { get; set; } = default!;
+        public DbSet<PF_Backend.Models.Ingredient> Ingredients { get; set; } = default!;
+        public DbSet<PF_Backend.Models.Portion> Portions { get; set; } = default!;
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Ingredients>()
-           .HasMany(e => e.Recipes)
-           .WithMany(e => e.Ingredients)
-           .UsingEntity<Portions>(
-               l => l.HasOne<Recipes>().WithMany().HasForeignKey(e => e.IdRecipes),
-               r => r.HasOne<Ingredients>().WithMany().HasForeignKey(e => e.IdIngredients));
-
-            modelBuilder.Entity<Recipes>()
-           .HasMany(e => e.Ingredients)
-           .WithMany(e => e.Recipes)
-           .UsingEntity<Portions>(
-               l => l.HasOne<Ingredients>().WithMany().HasForeignKey(e => e.IdIngredients),
-               r => r.HasOne<Recipes>().WithMany().HasForeignKey(e => e.IdRecipes));
-        }
     }
 }
